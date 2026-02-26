@@ -35,16 +35,14 @@ function getRandomInteger(start, end) {
 }
 
 function generateID(data) {
-  while (true) {
-    const randomID = getRandomInteger(data.min, data.max);
+  const randomID = getRandomInteger(data.min, data.max);
 
-    if (data.usedIDs.has(randomID)) {
-      continue;
-    }
-
-    data.usedIDs.add(randomID);
-    return randomID;
+  if (data.usedIDs.has(randomID)) {
+    return generateID(data);
   }
+
+  data.usedIDs.add(randomID);
+  return randomID;
 }
 
 function generatePhotoDescription() {
@@ -113,5 +111,4 @@ function createPhoto() {
 }
 
 
-const photos = Array.from({ length: 25 }, createPhoto);
-console.log(photos);
+Array.from({ length: 25 }, createPhoto);
