@@ -1,3 +1,4 @@
-import {createPhotos} from './data.js';
+import { createPhotos } from './create-photos.js';
 
-
+const photos = createPhotos(25);
+console.log(photos)

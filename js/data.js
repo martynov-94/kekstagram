@@ -1,5 +1,3 @@
-import {getRandomInteger, getRandomArrayElement} from './util.js';
-
 const COMMENTS_SENTENCES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -20,97 +18,17 @@ const NAMES = [
   'Валерия'
 ];
 
-const photosIDs = {
-  min: 1,
-  usedIDs: new Set()
-};
+const PHOTOS_DESCRIPTIONS = [
+  "Когда закат красит небо так, что хочется остановить время 🌅✨",
+  "Момент, когда кофе, плед и дождь за окном — идеальная формула счастья ☕🌧️",
+  "Просто я, море и ни одной мысли в голове 🌊😌",
+  "Поймала этот взгляд и теперь не могу перестать улыбаться 😏💙",
+  "Свет, тени и немного магии в одном кадре 🖤📸",
+  "Жизнь слишком коротка, чтобы не носить яркие платья 💃🌸",
+  "Проснулась рано ради этого вида… и ни капли сожаления 🏔️🌄",
+  "Маленькие радости в большом городе — мои любимые находки 🍦🚶‍♀️",
+  "Когда солнце целует кожу, а ветер путает волосы 🌞💨",
+  "Это не просто фото. Это кусочек лета, который я забрала с собой 🏖️🌺"
+];
 
-const commentsIDs = {
-  min: 1,
-  max: 10000,
-  usedIDs: new Set()
-};
-
-
-function generateID(data) {
-  const randomID = getRandomInteger(data.min, data.max);
-
-  if (data.usedIDs.has(randomID)) {
-    return generateID(data);
-  }
-
-  data.usedIDs.add(randomID);
-  return randomID;
-}
-
-function generatePhotoDescription() {
-  return 'Красивое описание фотографии';
-}
-
-function getPhotoLikes() {
-  return getRandomInteger(15, 300);
-}
-
-function getPhotoComments() {
-  const numberOfComments = getRandomInteger(0, 30);
-  return Array.from({ length: numberOfComments }, createComment);
-}
-
-function getCommentAvatar() {
-  return `img/avatar-${getRandomInteger(1, 6)}.svg`;
-}
-
-function getCommentMessage() {
-  const commentSentences = [];
-  const numberOfSentences = Math.min(getRandomInteger(1, 2), COMMENTS_SENTENCES.length);
-  const usedSentences = new Set();
-
-  while (commentSentences.length < numberOfSentences) {
-    const sentence = getRandomSentence();
-    if (usedSentences.has(sentence)) {
-      continue;
-    }
-
-    usedSentences.add(sentence);
-    commentSentences.push(sentence);
-  }
-
-  return commentSentences.join` `;
-}
-
-function getRandomSentence() {
-  return getRandomArrayElement(COMMENTS_SENTENCES);
-}
-
-function getCommentName() {
-  return getRandomArrayElement(NAMES);
-}
-
-function createComment() {
-  return {
-    id: generateID(commentsIDs),
-    avatar: getCommentAvatar(),
-    message: getCommentMessage(),
-    name: getCommentName()
-  };
-}
-
-function createPhoto() {
-  const photo = {
-    id: generateID(photosIDs),
-    description: generatePhotoDescription(),
-    likes: getPhotoLikes(),
-    comments: getPhotoComments()
-  };
-
-  photo.url = `photos/${photo.id}.jpg`;
-
-  return photo;
-}
-
-function createPhotos(n) {
-  photosIDs.max = n;
-  return Array.from({ length: n }, createPhoto);
-}
-
-export {createPhotos};
+export { COMMENTS_SENTENCES, NAMES, PHOTOS_DESCRIPTIONS };

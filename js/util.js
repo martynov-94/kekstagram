@@ -3,7 +3,7 @@ function getRandomInteger(start, end) {
 }
 
 function getRandomArrayElement(arr) {
-  return arr[getRandomInteger(0, arr.length)];
+  return arr[getRandomInteger(0, arr.length - 1)];
 }
 
 export {getRandomInteger, getRandomArrayElement};
