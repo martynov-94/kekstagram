@@ -1,4 +1,5 @@
 import { getRandomInteger, getRandomArrayElement } from './util.js';
+import { PHOTOS_DESCRIPTIONS } from './data.js';
 import { PhotoComment } from './photo-comment.js';
 
 export class Photo {
@@ -11,11 +12,11 @@ export class Photo {
     this.likes = this.getLikes();
     this.comments = this.getComments();
 
-    curID++;
+    Photo.curID++;
   }
 
   getID() {
-    return curID;
+    return Photo.curID;
   }
 
   getURL() {
@@ -32,6 +33,6 @@ export class Photo {
 
   getComments() {
     const numberOfComments = getRandomInteger(0, 30);
-    return Array.from({ length: numberOfComments }, createComment);
+    return Array.from({ length: numberOfComments }, () => new PhotoComment());
   }
 };
