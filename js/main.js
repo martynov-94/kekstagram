@@ -1,3 +1,3 @@
-import { createPhotos } from './create-photos.js';
+import { drawPhotos } from './draw-photos.js';
 
-const photos = createPhotos(25);
+const photos = drawPhotos(25);
